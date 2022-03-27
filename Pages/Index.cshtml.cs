@@ -1,6 +1,9 @@
 ﻿using Zad3.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+
 
 namespace Zad3.Pages
 {
@@ -26,7 +29,13 @@ namespace Zad3.Pages
         }
         public IActionResult OnPost()
         {
-            (ViewData["Message"], ViewData["MessageClass"]) = FizzBuzz.getOutput();
+            if (ModelState.IsValid)
+            {
+                HttpContext.Session.SetString("Data",
+                JsonConvert.SerializeObject(FizzBuzz));
+                (ViewData["Message"], ViewData["MessageClass"]) = FizzBuzz.getOutput();
+                return RedirectToPage("./SavedInSession");
+            }
             return Page();
 
         }

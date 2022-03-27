@@ -18,8 +18,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+builder.Services.AddMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
+app.UseAuthorization();
+app.UseSession();
 app.MapRazorPages();
 
 app.Run();
