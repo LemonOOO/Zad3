@@ -1,19 +1,16 @@
 ﻿@page
-@model IndexModel
-@{
-    ViewData["Title"] = "Home page";
-}
+@model IndexModel 
 
 <div class="text-center">
-    <h1 class="display-4">Welcome @Model.Name</h1>
-    <form method="post">
-        <span asp-validation-for="FizzBuzz.Number" class="text-danger"></span>
         <form method="post">
-            <label asp-for="FizzBuzz.Number"></label>
-            <input asp-for="FizzBuzz.Number" /><br />
+            <label asp-for="FizzBuzz.Name"></label>
+            <input asp-for="FizzBuzz.Name" />
+            <span asp-validation-for="FizzBuzz.Name" class="text-danger"></span>
+            <label asp-for="FizzBuzz.Year"></label>
+            <input type="number" asp-for="FizzBuzz.Year" />
+            <span asp-validation-for="FizzBuzz.Year" class="text-danger"></span>
             <button type="submit">Zatwierdź</button>
         </form>
-    </form>
     
 </div>
 @{

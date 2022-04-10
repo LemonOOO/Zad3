@@ -12,8 +12,8 @@ namespace Zad3.Pages
         private readonly ILogger<IndexModel> _logger;
         [BindProperty]
         public FizzBuzz FizzBuzz { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public string Name { get; set; }
+
+        public List<string>? list { get; set; }
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -22,22 +22,38 @@ namespace Zad3.Pages
 
         public void OnGet()
         {
-            if (string.IsNullOrWhiteSpace(Name))
-            {
-                Name = "User";
-            }
+            
         }
         public IActionResult OnPost()
         {
+            if (list == null)
+            {
+                list = new List<string>();
+            }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
                 HttpContext.Session.SetString("Data",
                 JsonConvert.SerializeObject(FizzBuzz));
-                (ViewData["Message"], ViewData["MessageClass"]) = FizzBuzz.getOutput();
-                return RedirectToPage("./SavedInSession");
+                if (FizzBuzz.getTypeOfYear())
+                {
+                    ViewData["Message"] = FizzBuzz.Name + " urodził się w " + FizzBuzz.Year + " roku. To był rok przestępny";
+                    list.Add(FizzBuzz.Name + " urodził się w " + FizzBuzz.Year + " roku. To był rok przestępny");
+                    ViewData["MessageClass"] = "success";
+                }
+                else
+                {
+                    ViewData["Message"] = FizzBuzz.Name + " urodził się w " + FizzBuzz.Year + " roku. To nie był rok przestępny";
+                    list.Add(FizzBuzz.Name + " urodził się w " + FizzBuzz.Year + " roku. To nie był rok przestępny");
+                    ViewData["MessageClass"] = "warning";
+                }
+            }
+            else
+            {
+                ViewData["Message"] = "ModelState.IsValid jest == false *** " + errors;
+                ViewData["MessageClass"] = "warning";
             }
             return Page();
-
         }
     }
 }

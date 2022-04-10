@@ -1,4 +1,18 @@
 ﻿@page
-@model Zad3.Pages.SavedInSessionModel
+@model SavedInSessionModel
 @{
+ViewData["Title"] = "Data in session";
+}
+<p>Dane w zapisane w sesji</p>
+@if (Model.list != null)
+{
+    <ul>
+        @foreach(var item in Model.list)
+        {
+        <li>
+            <div>Imie: @item.Name, Rok urodzenia: @item.Year</div>
+        </li>
+        }
+    </ul>
+    
 }
