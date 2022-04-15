@@ -33,8 +33,7 @@ namespace Zad3.Pages
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
-                HttpContext.Session.SetString("Data",
-                JsonConvert.SerializeObject(FizzBuzz));
+                
                 if (FizzBuzz.getTypeOfYear())
                 {
                     ViewData["Message"] = FizzBuzz.Name + " urodził się w " + FizzBuzz.Year + " roku. To był rok przestępny";
@@ -47,6 +46,8 @@ namespace Zad3.Pages
                     list.Add(FizzBuzz.Name + " urodził się w " + FizzBuzz.Year + " roku. To nie był rok przestępny");
                     ViewData["MessageClass"] = "warning";
                 }
+                HttpContext.Session.SetString("Data",
+                JsonConvert.SerializeObject(list));
             }
             else
             {

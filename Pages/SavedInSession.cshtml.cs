@@ -9,13 +9,13 @@ namespace Zad3.Pages
 {
     public class SavedInSessionModel : PageModel
     {
-        public List<FizzBuzz>? list { get; set; }
+        public List<string> list { get; set; }
         public void OnGet()
         {
             var Data = HttpContext.Session.GetString("Data");
             if (Data != null)
             {
-                list = JsonConvert.DeserializeObject<List<FizzBuzz>>(Data);
+                list = JsonConvert.DeserializeObject<List<string>>(Data);
                 HttpContext.Session.SetString("Data", Data);
             }
         }
