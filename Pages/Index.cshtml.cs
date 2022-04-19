@@ -25,7 +25,7 @@ namespace Zad3.Pages
 
         public void OnGet()
         {
-            
+            FizzBuzzData = _context.FizzBuzz.ToList();
         }
         public IActionResult OnPost()
         {

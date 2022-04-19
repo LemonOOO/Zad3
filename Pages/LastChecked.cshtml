@@ -1,10 +1,32 @@
 ﻿@page
 @model Zad3.Pages.LastCheckedModel
 @{
-    @foreach (var item in Model.FizzBuzz)
-{
-<p>@Html.DisplayFor(modelItem => item.Name)
-@Html.DisplayFor(modelItem => item.LastName)</p>
-}
+    <table BORDER CELLSPACING=5 CELLPADDING=15>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Date</th>
+                <th>Result</th>
+                <th></th>
+            </tr>
+            @foreach(var item in Model.FizzBuzzD){
+             <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.LastName</td>
+                <td>@item.Date</td>
+                <td>@item.Result</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" value="Delete">Delete</button>
+                    </form>
+                </td>
+             </tr>       
+            }
+    </tbody>
+ </table>
 
 }
