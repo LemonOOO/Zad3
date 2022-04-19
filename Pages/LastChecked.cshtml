@@ -1,0 +1,10 @@
+﻿@page
+@model Zad3.Pages.LastCheckedModel
+@{
+    @foreach (var item in Model.FizzBuzz)
+{
+<p>@Html.DisplayFor(modelItem => item.Name)
+@Html.DisplayFor(modelItem => item.LastName)</p>
+}
+
+}
