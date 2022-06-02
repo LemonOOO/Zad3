@@ -1,12 +1,23 @@
 using Zad3.Data;
 using Microsoft.EntityFrameworkCore;
+using Zad3.Interfaces;
+using Zad3.Services;
+using Zad3.Respository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddTransient<IFizzBuzzService, FizzBuzzService>();
+builder.Services.AddTransient<IFizzBuzzRepository, FizzBuzzRepository>();
+
 builder.Services.AddDbContext<FizzBuzzContext>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("Zad3DB")));
+options.UseSqlServer(
+    builder.Configuration.GetConnectionString("Zad5+"),
+    sqlServerOptionsAction: sqlOptions =>
+    {
+        sqlOptions.EnableRetryOnFailure();
+    }));
 builder.Services.AddMemoryCache();
 builder.Services.AddSession(options =>
 {

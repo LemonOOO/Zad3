@@ -21,3 +21,25 @@
             @ViewData["Message"]
     </div>
 }
+<div>
+    @if (Model.List == null)
+    {
+        <div>No data searched</div>
+    }
+    else
+    {
+        <table>
+            <tbody>
+                @foreach (var item in Model.List)
+                {
+                    <tr>
+                        <td>@item.Year</td>
+                        <td>@item.FullName</td>
+                        <td>@item.Date</td>
+                        <td>@item.Result</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

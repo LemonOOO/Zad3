@@ -1,43 +1,27 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zad3.Models;
-using Zad3.Data;
+using Zad3.Interfaces;
+using Zad3.ViewModels;
 
 namespace Zad3.Pages
 {
     public class LastCheckedModel : PageModel
     {
         private readonly ILogger<LastCheckedModel> _logger;
-        private readonly FizzBuzzContext _context;
+        private readonly IFizzBuzzService _FizzBuzzService;
+        public List<ListViewModel> List;
 
         public IList<FizzBuzz> FizzBuzzD { get; set; }
         public FizzBuzz FizzBuzz { get; set; }
-        public LastCheckedModel(ILogger<LastCheckedModel> logger,  FizzBuzzContext context)
+        public LastCheckedModel(ILogger<LastCheckedModel> logger,  IFizzBuzzService service)
         {
-            _context = context;
+            _FizzBuzzService = service;
             _logger = logger;
         }
 
         public void OnGet()
         {
-            if (_context != null)
-            {
-                FizzBuzzD = _context.FizzBuzz.OrderByDescending(x => x.Date).Take(20).ToList();
-            }
-        }
-        public IActionResult OnPostAsync(int id)
-        {
-            FizzBuzz = _context.FizzBuzz.Find(id);
-            if (FizzBuzz != null)
-            {
-                _context.FizzBuzz.Remove(FizzBuzz);
-                _context.SaveChanges();
-            }
-            if (_context != null)
-            {
-                FizzBuzzD = _context.FizzBuzz.OrderByDescending(x => x.Date).Take(20).ToList();
-            }
-            return Page();
+            List = _FizzBuzzService.GetAllEntries();
         }
     }
 }
