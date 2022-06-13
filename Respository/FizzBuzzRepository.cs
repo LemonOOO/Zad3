@@ -20,6 +20,8 @@ namespace Zad3.Respository
 
         public void AddToRepo(FizzBuzz fizzBuzz)
         {
+
+            fizzBuzz.UserID = 1;
             _context.FizzBuzz.Add(fizzBuzz);
             _context.SaveChanges();
         }

@@ -29,6 +29,7 @@ namespace Zad3.Models
         [Display(Name = "Wynik")]
         [Column(TypeName = "varchar(300)")]
         public string? Result { get; set; }
+        public int? UserID { get; set; }
 
         public bool getTypeOfYear()
         {

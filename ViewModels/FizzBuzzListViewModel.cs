@@ -17,5 +17,6 @@ namespace Zad3.ViewModels
 
         [Display(Name = "Wynik")]
         public string? Result { get; set; }
+        public int? UserId { get; internal set; }
     }
 }

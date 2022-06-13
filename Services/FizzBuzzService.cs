@@ -25,6 +25,7 @@ namespace Zad3.Services
                     Year = entry.Year,
                     Date = entry.Date,
                     Result = entry.Result,
+                    UserId = entry.UserID
                 };
                 Data.Add(VM);
             }
@@ -49,6 +50,7 @@ namespace Zad3.Services
                     Year = entry.Year,
                     Date = entry.Date,
                     Result = entry.Result,
+                    UserId = entry.UserID
                 };
                 Data.Add(VM);
             }
